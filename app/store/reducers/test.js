@@ -3,29 +3,25 @@ const initialState = {
 	a: 1
 };
 
-const test = (state = initialState, action) => {
+const test = (state, action) => {
 
-	const TYPE = action.type || '';
-	const PAYLOAD = action.payload || null;
-	const log = false;
+	const log = true;
 	let newState;
+	let type = (!state) ? 'INITIAL' : action.type;
+	let payload = action.payload || null;
+	if (!state) { state = initialState; }
 
-
-	if (log) {
-		console.log(`[old state] TYPE: ${TYPE} | PAYLOAD:`, PAYLOAD, '| STATE', state);
-	}
-
-	switch (TYPE) {
+	switch (type) {
 		case 'A':
-			newState = { ...state, a: PAYLOAD };
+			newState = { ...state, a: payload };
 			break;
 		default:
 			newState = state;
 			break;
 	}
 
-	if (log) {
-		console.log(`[new state] TYPE: ${TYPE} | PAYLOAD:`, PAYLOAD, '| STATE', newState);
+	if (log && type !== 'INITIAL') {
+		console.log(`[REDUX] ACTION: ${type}`, { payload: payload, oldState: state, state: newState });
 	}
 	return newState;
 };

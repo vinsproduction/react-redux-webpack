@@ -1,10 +1,10 @@
 
 import { B } from '../constants/actionTypes';
 
-export const changeB = (newTest) => {
+export const changeB = (payload) => {
 
 	return {
 		type: B,
-		payload: newTest
+		payload: payload
 	};
 };

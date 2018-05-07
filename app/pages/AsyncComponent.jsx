@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 
-export default class AsyncComponent extends PureComponent {
+class AsyncComponent extends PureComponent {
 	
 	constructor(props) {
 		super(props);
@@ -42,3 +42,5 @@ export default class AsyncComponent extends PureComponent {
 AsyncComponent.propTypes = {
 	moduleProvider: PropTypes.func
 };
+
+export default AsyncComponent;
