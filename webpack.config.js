@@ -1,5 +1,6 @@
 
 const ENV = process.env.ENV || 'dev';
+const PORT = 8888;
 const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -11,7 +12,7 @@ const folders = {
 };
 
 console.log('\r\n\r\n ============================\r\n\r\n');
-console.log('ENV: ' + ENV);
+console.log(`ENV: ${ENV} | PORT ${PORT}`);
 console.log('\r\n\r\n ============================\r\n\r\n');
 
 module.exports = {
@@ -97,7 +98,7 @@ module.exports = {
 	},
 
 	devServer: {
-		port: 8888,
+		port: PORT,
 		noInfo: true,
 		contentBase: folders.dist,
 		historyApiFallback: {

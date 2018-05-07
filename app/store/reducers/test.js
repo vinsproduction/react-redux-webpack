@@ -6,7 +6,7 @@ const initialState = {
 const test = (state, action) => {
 
 	const log = true;
-	let newState;
+	let newState, defaultAction = false;
 	let type = (!state) ? 'INITIAL' : action.type;
 	let payload = action.payload || null;
 	if (!state) { state = initialState; }
@@ -17,10 +17,11 @@ const test = (state, action) => {
 			break;
 		default:
 			newState = state;
+			defaultAction = true;
 			break;
 	}
 
-	if (log && type !== 'INITIAL') {
+	if (log && !defaultAction && type !== 'INITIAL') {
 		console.log(`[REDUX] ACTION: ${type}`, { payload: payload, oldState: state, state: newState });
 	}
 	return newState;
