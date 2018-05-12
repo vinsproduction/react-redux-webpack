@@ -3,9 +3,14 @@ import { A } from '../constants/actionTypes';
 
 
 export const changeA = (payload) => {
-	
-	return {
-		type: A,
-		payload: payload
+
+	// thunk
+	return function (dispatch) {
+
+		return dispatch({
+			type: A,
+			payload: payload
+		});
+
 	};
 };

@@ -1,8 +1,8 @@
 import React from 'react';
 
-import Header from 'app/main/header/Header';
-import Footer from 'app/main/footer/Footer';
-import Pages from 'app/pages/Pages';
+import Header from '../../main/header/Header';
+import Footer from '../../main/footer/Footer';
+import Pages from '../../pages/Pages';
 
 
 class Layout extends React.Component {

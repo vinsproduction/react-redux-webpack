@@ -4,14 +4,11 @@ const initialState = {
 	b: 1
 };
 
-const rest = (state, action) => {
-	
-	const log = true;
-	let newState, defaultAction = false;
-	let type = (!state) ? 'INITIAL' : action.type;
-	let payload = action.payload || null;
-	if (!state) { state = initialState; }
+const rest = (state = initialState, action) => {
 
+	let newState, defaultAction = false;
+	const type = action.type;
+	const payload = action.payload;
 
 	switch (type) {
 		case 'B':
@@ -23,7 +20,7 @@ const rest = (state, action) => {
 			break;
 	}
 
-	if(log && !defaultAction && type !== 'INITIAL') {
+	if(!defaultAction) {
 		console.log(`[REDUX] ACTION: ${type}`, { payload: payload, oldState: state, state: newState });
 	}
 	return newState;

@@ -7,7 +7,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const folders = {
 	src: path.join(__dirname, './app'),
-	dist: path.join(__dirname, './htdocs'),
+	dest: path.join(__dirname, './htdocs'),
 	nodeModules: path.resolve(__dirname, './node_modules')
 };
 
@@ -28,7 +28,7 @@ module.exports = {
 	},
 
 	output: {
-		path: folders.dist,
+		path: folders.dest,
 		publicPath: '/',
 		pathinfo: (ENV === 'dev'), // show comments in bundles
 		filename:
@@ -91,16 +91,14 @@ module.exports = {
 		],
 		alias: {
 			'node_modules': folders.nodeModules,
-			'app': folders.src,
-			'pages': path.resolve(folders.src, 'pages'),
-			'store': path.resolve(folders.src, 'store')
+			'app': folders.src
 		}
 	},
 
 	devServer: {
 		port: PORT,
 		noInfo: true,
-		contentBase: folders.dist,
+		contentBase: folders.dest,
 		historyApiFallback: {
 			rewrites: [
 				{ from: /^\/$/, to: '/index.html' },
