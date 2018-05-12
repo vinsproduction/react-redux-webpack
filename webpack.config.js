@@ -64,13 +64,6 @@ module.exports = {
 				loader: 'html-loader'
 			},
 			{
-				test: /\.pug$/,
-				loader:
-					(ENV === 'build' || ENV === 'prod')
-						? 'pug-loader'
-						: 'pug-loader?pretty',
-			},
-			{
 				test: /\.styl$/,
 				loaders:
 					[
@@ -109,7 +102,7 @@ module.exports = {
 	plugins: [
 		new HtmlWebpackPlugin({
 			inject: true,
-			template: './app/index.pug',
+			template: './app/index.html',
 			filename: './index.html',
 			chunks: ['app'],
 			chunksSortMode: function (a, b) {

@@ -1,46 +1,38 @@
-import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
+import React from 'react';
 
-class AsyncComponent extends PureComponent {
-	
-	constructor(props) {
-		super(props);
 
-		this.state = {
-			Component: null
-		};
-	}
+const AsyncComponent = (importComponent) => {
 
-	unCamelCase(s) {
-		return s.split(/(?=[A-Z])/).join('-').toLowerCase();
-	}
+	return class Component extends React.Component {
 
-	componentWillMount() {
-		if (!this.state.Component) {
-			this.props.moduleProvider().then(( component ) => {
-				document.body.setAttribute('page', this.unCamelCase(component.default.name));
+		state = {
+			component: null,
+		}
+
+		componentDidMount() {
+
+			importComponent().then((component) => {
 				this.setState({ component: component.default });
 			});
+
 		}
-	}
 
-	componentWillUnmount() {
-		document.body.removeAttribute('page');
-	}
+		render() {
+			const Component = this.state.component;
 
-	render() {
-		const Component = this.state.component;
-		return (
-			<React.Fragment>
-				{/* {Component ? <Component {...this.props} /> : null} */}
-				{Component ? <Component /> : null}
-			</React.Fragment>
-		);
-	}
-}
+			return (Component) ? (
+				<React.Fragment>
+					{Component ? <Component {...this.props} /> : null}
+				</React.Fragment>
+			) : (
+					<React.Fragment>
+						<p>Загрузка...</p>
+					</React.Fragment>
+				);
 
-AsyncComponent.propTypes = {
-	moduleProvider: PropTypes.func
+		}
+	};
 };
+
 
 export default AsyncComponent;
